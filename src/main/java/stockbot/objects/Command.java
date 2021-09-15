@@ -1,6 +1,9 @@
 package stockbot.objects;
 
 import net.dv8tion.jda.api.EmbedBuilder;
+import net.dv8tion.jda.api.entities.Member;
+import stockbot.handlers.CommandCooldownHandler;
+import stockbot.utils.EmbedUtils;
 
 import java.awt.*;
 import java.io.FileNotFoundException;
@@ -16,14 +19,21 @@ public abstract class Command
       private List<Permission> permissions;
       private List<Permission> botPermissions;
       private List<String> aliases;
+      private long cooldown;
 
       public Command(String name, String description, String tutorial){
             this.name = name;
+            this.cooldown = 5000;
             this.description = description;
             this.tutorial = tutorial;
             this.permissions = new ArrayList<>();
             this.botPermissions = new ArrayList<>();
             this.aliases = new ArrayList<>();
+      }
+
+      public long getCooldown()
+      {
+            return cooldown;
       }
 
       public String getName()
@@ -64,6 +74,12 @@ public abstract class Command
             if(commandEvent.getEvent().getAuthor().isBot()){
                   return;
             }
+            else if (CommandCooldownHandler.isOnCooldown(commandEvent.getMember(), this))
+            {
+                  EmbedUtils.sendIsOnCooldown(commandEvent);
+                  return;
+            }
+            addUserToCooldown(commandEvent.getMember());
             run(commandEvent, commandEvent.getArguments());
       }
       public abstract void run(CommandEvent commandEvent, List<String> arguments);
@@ -72,6 +88,10 @@ public abstract class Command
                     .setColor(Color.RED)
                     .addField("⚠Error⚠", "Stock Does Not Exist", true)
                     .build()).queue();
+      }
+      public void addUserToCooldown(Member member)
+      {
+            CommandCooldownHandler.addCooldown(member, this);
       }
 
 

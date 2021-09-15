@@ -8,30 +8,30 @@ import java.util.concurrent.TimeUnit;
 
 public class WatchlistCheck
 {
-      private static final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
-
+      static ScheduledExecutorService scheduler;
       public static void start(String run){
-//            if(run.equals("start"))
-//            {
-//                  if(scheduler.isShutdown()){
-//                       scheduler.
-//                  }
-                  final Runnable beeper = new Runnable()
+            if(run.equals("start"))
+            {
+                  if(scheduler == null || scheduler.isShutdown())
                   {
-                        public void run()
+                        scheduler = Executors.newScheduledThreadPool(1);
+
+                        final Runnable beeper = new Runnable()
                         {
-                              System.out.println("beep");
-                        }
-                  };
-                  final ScheduledFuture<?> beeperHandle = scheduler.scheduleAtFixedRate(beeper, 0, 2, TimeUnit.SECONDS);
-//            }
-            if(run.equals("stop")){
-                  scheduler.schedule(new Runnable() {
-                        public void run() { beeperHandle.cancel(true); }
-                  }, 1, TimeUnit.SECONDS);
-            }
+                              public void run()
+                              {
+                                    System.out.println("beep");
+                              }
+                        };
+                        final ScheduledFuture<?> beeperHandle = scheduler.scheduleAtFixedRate(beeper, 0, 2, TimeUnit.SECONDS);
+                  }
+           }
       }
-      public static void stop(){
+      public static void stop(String run){
+            if(run.equals("stop"))
+            {
+                  scheduler.shutdown();
+            }
 
       }
 }

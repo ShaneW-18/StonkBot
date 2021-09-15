@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.EmbedBuilder;
 import net.dv8tion.jda.api.interactions.components.Button;
 import stockbot.objects.Command;
 import stockbot.objects.CommandEvent;
+
 import java.awt.*;
 import java.util.List;
 
@@ -28,8 +29,8 @@ public class Tutorial extends Command
                                   .setFooter("Stonk Bot", "https://i.imgur.com/ffvUfao.jpeg")
                                   .setImage("https://i.imgur.com/ffvUfao.jpeg")
                                   .build())
-                          .setActionRow(Button.primary("prev","Previous"),
-                                  Button.danger("exit", "Exit"),
+                          .setActionRow(net.dv8tion.jda.api.interactions.components.Button.primary("prev","Previous"),
+                                  net.dv8tion.jda.api.interactions.components.Button.danger("exit", "Exit"),
                                   Button.success("next","Next"))
                           .queue();
             }

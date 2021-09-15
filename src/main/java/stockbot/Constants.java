@@ -1,11 +1,8 @@
 package stockbot;
 
-import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import java.util.ArrayList;
 
 public class Constants
 {
       public static final String PREFIX = "$";
-
-
-
 }

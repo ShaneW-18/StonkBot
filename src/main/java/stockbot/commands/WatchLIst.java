@@ -12,7 +12,7 @@ import java.util.concurrent.TimeUnit;
 
 public class WatchLIst extends Command
 {
-      private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+
 
       public WatchLIst()
       {
@@ -23,7 +23,16 @@ public class WatchLIst extends Command
       @Override
       public void run(CommandEvent commandEvent, List<String> arguments)
       {
-           WatchlistCheck.start(arguments.get(1));
+
+            if (arguments.get(1).equals("start"))
+                  WatchlistCheck.start(arguments.get(1));
+
+            else if (arguments.get(1).equals("stop"))
+                  WatchlistCheck.stop(arguments.get(1));
+
+            else
+                  error(commandEvent,arguments);
+
 
       }
 
