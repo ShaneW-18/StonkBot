@@ -7,6 +7,7 @@ import stockbot.objects.ReadWrite;
 import stockbot.utils.StringUtils;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class SeeWatchList extends Command
@@ -21,7 +22,7 @@ public class SeeWatchList extends Command
       @Override
       public void run(CommandEvent commandEvent, List<String> arguments)
       {
-            ReadWrite stocks = new ReadWrite(commandEvent.getEvent().getGuild().getId(), commandEvent.getEvent());
+            ReadWrite stocks = new ReadWrite<ArrayList<String>>(commandEvent.getEvent().getGuild().getId(), commandEvent.getEvent());
             commandEvent.getChannel().sendMessageEmbeds(new EmbedBuilder()
                     .setTitle("WatchList for the server")
                     .setFooter("Stonk Bot", "https://i.imgur.com/ffvUfao.jpeg")

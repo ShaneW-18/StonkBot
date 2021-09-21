@@ -20,7 +20,7 @@ public class RemoveFromWatchList extends Command
       {
             try
             {
-                  ReadWrite read = new ReadWrite(commandEvent.getEvent().getGuild().getId(), commandEvent.getEvent());
+                  ReadWrite<ArrayList<String>> read = new ReadWrite(commandEvent.getEvent().getGuild().getId(), commandEvent.getEvent());
                   ArrayList<String> stocks = read.read();
                   if (stocks.remove(arguments.get(1)))
                   {

@@ -5,26 +5,35 @@ import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import java.io.*;
 import java.util.ArrayList;
 
-public class ReadWrite
+public class ReadWrite<t>
 {
       GuildMessageReceivedEvent event;
       File file;
 
       public ReadWrite(String file, GuildMessageReceivedEvent event){
             this.event = event;
-            this.file = new File("src/main/java/stockbot/utils/files/" + file + ".dat");
+            this.file =  new File("src/main/java/stockbot/utils/files/" + file + ".dat");
             System.out.println(this.file.exists());
       }
-      public void write(ArrayList<String> stock) throws IOException
+      public void write(t data)
       {
-                  FileOutputStream writeData = new FileOutputStream(file);
+            FileOutputStream writeData = null;
+            try
+            {
+                  writeData = new FileOutputStream(file);
+
                   ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
 
-                  writeStream.writeObject(stock);
+                  writeStream.writeObject(data);
                   writeStream.flush();
                   writeStream.close();
+            }
+            catch (IOException e)
+            {
+                  e.printStackTrace();
+            }
       }
-      public ArrayList<String> read(){
+      public t read(){
 
             try{
                   if(file.exists() && file.length() != 0)
@@ -33,7 +42,7 @@ public class ReadWrite
                         FileInputStream readData = new FileInputStream(file);
                         ObjectInputStream readStream = new ObjectInputStream(readData);
 
-                        ArrayList<String> stocks = (ArrayList<String>) readStream.readObject();
+                        t stocks =(t) readStream.readObject();
                         readStream.close();
                         return stocks;
                   }

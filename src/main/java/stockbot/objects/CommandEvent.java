@@ -5,9 +5,10 @@ import net.dv8tion.jda.api.entities.*;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import stockbot.StockBot;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class CommandEvent
+public class CommandEvent implements Serializable
 {
       private Command command;
       private List<String> arguments;

@@ -21,7 +21,7 @@ public class AddToWatchlist extends Command
       @Override
       public void run(CommandEvent commandEvent, List<String> arguments)
       {
-            ReadWrite file = new ReadWrite(commandEvent.getEvent().getGuild().getId(), commandEvent.getEvent());
+            ReadWrite<ArrayList<String>> file = new ReadWrite(commandEvent.getEvent().getGuild().getId(), commandEvent.getEvent());
             try
             {
                   YahooFinance.get(arguments.get(1)).getName();
