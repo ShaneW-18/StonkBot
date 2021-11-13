@@ -34,7 +34,7 @@ public class StockPrice extends Command
                           .addField(s.toString(), s.getCurrency() + "\n", true)
                           .setThumbnail("https://scontent-iad3-2.xx.fbcdn.net/v/t1.18169-9/18893237_1576454562398650_2487229831759873167_n.png?_nc_cat=111&ccb=1-3&_nc_sid=9267fe&_nc_ohc=UtR23ISzooYAX-5KMAc&_nc_ht=scontent-iad3-2.xx&oh=b2619b4dfba4228a00ef68e693b5038b&oe=60F3681E")
                           .setTitle(s.getName(), "https://finance.yahoo.com/quote/" + s.getSymbol() + "?p=INTC&.tsrc=fin-srch")
-                          .setFooter(StringUtils.dateFormat())
+                          .setFooter(StringUtils.getDateTime())
                           .build()).queue(onMessage ->
                   {
                         String checkMark = "✅";

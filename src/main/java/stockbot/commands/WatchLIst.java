@@ -1,18 +1,11 @@
 package stockbot.commands;
 
-import stockbot.objects.Command;
-import stockbot.objects.CommandEvent;
-import stockbot.objects.WatchListThread;
-import stockbot.objects.ReadWrite;
+import stockbot.objects.*;
 import stockbot.utils.EmbedUtils;
 import stockbot.utils.ServerThreads;
 
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.*;
 
 public class WatchLIst extends Command
 {
@@ -35,10 +28,16 @@ public class WatchLIst extends Command
                         EmbedUtils.error(commandEvent.getEvent(), "Watch List Is Already Up!");
                   else
                   {
-                        thread = new WatchListThread(commandEvent.getEvent().getGuild().getId(), commandEvent);
-                        thread.start();
-                        ServerThreads.servers.put(commandEvent.getEvent().getGuild().getId(), thread);
+                        ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(1);
+                        WatchListThread w = new WatchListThread(commandEvent.getEvent().getGuild().getId(), commandEvent);
+                        final ScheduledFuture<?> beeperHandle = scheduler.scheduleAtFixedRate(w, 0, 50, TimeUnit.SECONDS);
+                        ServerThreads.servers.put(commandEvent.getEvent().getGuild().getId(), scheduler);
                   }
+//                  {
+////                        Thread thread = new Thread(new WatchListThread2(commandEvent.getEvent().getGuild().getId(),commandEvent));
+////                        thread.start();
+//
+//                  }
             }
 
 
@@ -46,7 +45,7 @@ public class WatchLIst extends Command
             {
                   if (ServerThreads.servers.containsKey(commandEvent.getEvent().getGuild().getId()))
                   {
-                        ServerThreads.servers.get(commandEvent.getEvent().getGuild().getId()).stop();
+                        ServerThreads.servers.get(commandEvent.getEvent().getGuild().getId()).shutdown();
                         ServerThreads.servers.remove(commandEvent.getEvent().getGuild().getId());
                   }
 

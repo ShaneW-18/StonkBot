@@ -13,6 +13,10 @@ import stockbot.listeners.MessageEventListener;
 import stockbot.listeners.RemoveMemberEventListener;
 
 import javax.security.auth.login.LoginException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadPoolExecutor;
 
 public class StockBot extends ListenerAdapter
 {
@@ -35,6 +39,7 @@ public class StockBot extends ListenerAdapter
                     .addEventListeners(new RemoveMemberEventListener())
                     .addEventListeners(new ButtonClickEventListener(this))
                     .build();
+
       }
 
       public GuildMessageReceivedEvent getEvent()

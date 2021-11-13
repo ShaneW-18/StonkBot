@@ -33,7 +33,7 @@ public class TopMovers extends Command
                           .addField(YahooFinance.get(topGains.getTopStocks().get(3)).getName(), "[" + topGains.getTopStocks().get(3) + "]" + "(https://finance.yahoo.com/quote/" + topGains.getTopStocks().get(3) + "?p=" + topGains.getTopStocks().get(3) + ")" + ":chart_with_upwards_trend: " + YahooFinance.get(topGains.getTopStocks().get(3)).getQuote().getChangeInPercent() + "%", false)
                           .addField(YahooFinance.get(topGains.getTopStocks().get(4)).getName(), "[" + topGains.getTopStocks().get(4) + "]" + "(https://finance.yahoo.com/quote/" + topGains.getTopStocks().get(4) + "?p=" + topGains.getTopStocks().get(4) + ")" + ":chart_with_upwards_trend: " + YahooFinance.get(topGains.getTopStocks().get(4)).getQuote().getChangeInPercent() + "%", false)
                           .setFooter("Stonk Bot", "https://i.imgur.com/ffvUfao.jpeg")
-                          .setDescription("Biggest Gainers on: " + StringUtils.dateFormat())
+                          .setDescription("Biggest Gainers on: " + StringUtils.getDateTime())
                           .setColor(Color.GREEN)
                           .build()).queue();
                   commandEvent.getChannel().sendMessageEmbeds(new EmbedBuilder()
@@ -44,7 +44,7 @@ public class TopMovers extends Command
                           .addField(YahooFinance.get(topLosers.getTopStocks().get(3)).getName(), "[" + topLosers.getTopStocks().get(3) + "]" + "(https://finance.yahoo.com/quote/" + topLosers.getTopStocks().get(3) + "?p=" + topLosers.getTopStocks().get(3) + ")" + ":chart_with_downwards_trend: " + YahooFinance.get(topLosers.getTopStocks().get(3)).getQuote().getChangeInPercent() + "%", false)
                           .addField(YahooFinance.get(topLosers.getTopStocks().get(4)).getName(), "[" + topLosers.getTopStocks().get(4) + "]" + "(https://finance.yahoo.com/quote/" + topLosers.getTopStocks().get(4) + "?p=" + topLosers.getTopStocks().get(4) + ")" + ":chart_with_downwards_trend: " + YahooFinance.get(topLosers.getTopStocks().get(4)).getQuote().getChangeInPercent() + "%", false)
                           .setFooter("Stonk Bot", "https://i.imgur.com/ffvUfao.jpeg")
-                          .setDescription("Biggest Losers on: " + StringUtils.dateFormat())
+                          .setDescription("Biggest Losers on: " + StringUtils.getDateTime())
                           .setColor(Color.GREEN)
                           .build()).queue();
 
